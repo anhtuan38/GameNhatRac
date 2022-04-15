@@ -24,9 +24,8 @@
   height: 150px;
 }
 
-.arrow-up {
-  display: flex;
-  justify-content: center;
+.arrow {
+  cursor: pointer;
 }
 
 
@@ -55,5 +54,7 @@
   border: 3px solid #FFFFFF;
   box-sizing: border-box;
   border-radius: 15px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
