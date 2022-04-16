@@ -1,6 +1,10 @@
+const $ = (value) => {
+  return document.getElementById(value);
+};
+
 const maxRow = 12;
 const maxColumn = 13;
-const root = document.getElementById("root");
+const root = $("root");
 let indexRed = { curentX: 0, curentY: 0 };
 let arrayBlack = [
   { x: 1, y: 5 },
@@ -20,7 +24,7 @@ function UpdateMap() {
     }
     return check;
   }
-  document.getElementById("childrenRoot").remove();
+  $("childrenRoot").remove();
   const div1 = document.createElement("div");
   div1.setAttribute("id", "childrenRoot");
   div1.setAttribute("class", "board-game");
@@ -46,7 +50,7 @@ function UpdateMap() {
     }
 }
 
-const startBtn = document.getElementById("start");
+const startBtn = $("start");
 
 function start() {
   alert("bắt đầu trò chơi");
@@ -59,10 +63,10 @@ const UpdateIndex = function (x, y) {
   indexRed.curentY = y;
 };
 
-const up = document.getElementById("up");
-const down = document.getElementById("down");
-const right = document.getElementById("right");
-const left = document.getElementById("left");
+const up = $("up");
+const down = $("down");
+const right = $("right");
+const left = $("left");
 
 up.addEventListener("click", (e) => {
   if (indexRed.curentX > 0) {
@@ -103,7 +107,7 @@ const pickUpTrash = () => {
   }
 };
 
-const pickUpBtn = document.getElementById("pickUp");
+const pickUpBtn = $("pickUp");
 
 function lumRac() {
   pickUpTrash(indexRed.curentX, indexRed.curentY);
