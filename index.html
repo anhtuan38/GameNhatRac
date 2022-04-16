@@ -21,19 +21,20 @@
   <div class="wrapper">
     <div class="controller">
       <div class="d-flex w-100 justify-content-center">
-        <img src="./up.png" class="arrow">
+        <img src="./up.png" class="arrow" id="up">
       </div>
       <div class="w-100 d-flex justify-content-between">
-        <img src="./left.png" class="arrow">
-        <img src="./right.png" class="arrow">
+        <img src="./left.png" class="arrow" id="left">
+        <img src="./right.png" class="arrow" id="right">
       </div>
       <div class="d-flex w-100 justify-content-center">
-        <img src="./down.png" class="arrow">
+        <img src="./down.png" class="arrow" id="down">
       </div>
     </div>
-    <div class="board-game" id="root">
+    <div id="root">
+      <div class="board-game" id="childrenRoot"></div>
     </div>
-    <div class="Key arrow">A</div>
+    <div class="Key arrow" id="pickUp">A</div>
     <div class="Key arrow" id="start">S</div>
   </div>
 </body>
