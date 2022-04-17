@@ -1,34 +1,40 @@
+const maxRow = 12;
+const maxColumn = 13;
+
 const $ = (value) => {
   return document.getElementById(value);
 };
 
-const maxRow = 12;
-const maxColumn = 13;
+const randomInteger = () => {
+  return Math.floor(Math.random() * maxRow);
+};
+
+function Check(x, y) {
+  let check = false;
+  for (let i = 0; i < arrayBlack.length; i++) {
+    if (arrayBlack[i].x == x && arrayBlack[i].y == y) {
+      check = true;
+      break;
+    }
+  }
+  return check;
+}
+
 const root = $("root");
 let indexRed = { currentX: 0, currentY: 0 };
 let arrayBlack = [
-  { x: 1, y: 5 },
-  { x: 6, y: 4 },
-  { x: 3, y: 3 },
-  { x: 4, y: 2 },
+  { x: randomInteger(), y: randomInteger() },
+  { x: randomInteger(), y: randomInteger() },
+  { x: randomInteger(), y: randomInteger() },
+  { x: randomInteger(), y: randomInteger() },
 ];
 
 function UpdateMap() {
-  function Check(x, y) {
-    let check = false;
-    for (let i = 0; i < arrayBlack.length; i++) {
-      if (arrayBlack[i].x == x && arrayBlack[i].y == y) {
-        check = true;
-        break;
-      }
-    }
-    return check;
-  }
   $("childrenRoot").remove();
-  const div1 = document.createElement("div");
-  div1.setAttribute("id", "childrenRoot");
-  div1.setAttribute("class", "board-game");
-  root.append(div1);
+  const divChildren = document.createElement("div");
+  divChildren.setAttribute("id", "childrenRoot");
+  divChildren.setAttribute("class", "board-game");
+  root.append(divChildren);
   for (let i = 0; i <= maxRow; i++)
     for (let j = 0; j <= maxColumn; j++) {
       const div = document.createElement("div");
@@ -46,7 +52,7 @@ function UpdateMap() {
         Black.setAttribute("class", "black");
         div.append(Black);
       }
-      div1.append(div);
+      divChildren.append(div);
     }
 }
 
