@@ -1,5 +1,6 @@
 const maxRow = 12;
 const maxColumn = 13;
+const blackPoints = 5;
 
 let isStartGame = false;
 
@@ -9,6 +10,16 @@ const $ = (value) => {
 
 const randomInteger = () => {
   return Math.floor(Math.random() * maxRow);
+};
+
+const randomArrayBlack = () => {
+  for (let i = 0; i < blackPoints; i++) {
+    const x = randomInteger();
+    const y = randomInteger();
+    if (!Check(x, y)) {
+      arrayBlack.push({ x, y });
+    }
+  }
 };
 
 function Check(x, y) {
@@ -24,12 +35,7 @@ function Check(x, y) {
 
 const root = $("root");
 let indexRed = { currentX: 0, currentY: 0 };
-let arrayBlack = [
-  { x: randomInteger(), y: randomInteger() },
-  { x: randomInteger(), y: randomInteger() },
-  { x: randomInteger(), y: randomInteger() },
-  { x: randomInteger(), y: randomInteger() },
-];
+let arrayBlack = [];
 
 function UpdateMap() {
   $("childrenRoot").remove();
@@ -132,6 +138,7 @@ const startBtn = $("start");
 
 function start() {
   alert("bắt đầu trò chơi");
+  randomArrayBlack();
   isStartGame = true;
   UpdateMap();
 }
