@@ -5,7 +5,7 @@ const $ = (value) => {
 const maxRow = 12;
 const maxColumn = 13;
 const root = $("root");
-let indexRed = { curentX: 0, curentY: 0 };
+let indexRed = { currentX: 0, currentY: 0 };
 let arrayBlack = [
   { x: 1, y: 5 },
   { x: 6, y: 4 },
@@ -36,7 +36,7 @@ function UpdateMap() {
       div.setAttribute("data-x", i);
       div.setAttribute("data-y", j);
 
-      if (i === indexRed.curentX && j === indexRed.curentY) {
+      if (i === indexRed.currentX && j === indexRed.currentY) {
         const red = document.createElement("div");
         red.setAttribute("class", "red");
         div.append(red);
@@ -50,17 +50,9 @@ function UpdateMap() {
     }
 }
 
-const startBtn = $("start");
-
-function start() {
-  alert("bắt đầu trò chơi");
-  UpdateMap();
-}
-startBtn.addEventListener("click", start);
-
 const UpdateIndex = function (x, y) {
-  indexRed.curentX = x;
-  indexRed.curentY = y;
+  indexRed.currentX = x;
+  indexRed.currentY = y;
 };
 
 const up = $("up");
@@ -69,34 +61,34 @@ const right = $("right");
 const left = $("left");
 
 up.addEventListener("click", (e) => {
-  if (indexRed.curentX > 0) {
-    indexRed = { ...indexRed, curentX: indexRed.curentX - 1 };
+  if (indexRed.currentX > 0) {
+    indexRed = { ...indexRed, currentX: indexRed.currentX - 1 };
     UpdateMap();
   }
 });
 down.addEventListener("click", (e) => {
-  if (indexRed.curentX < maxRow) {
-    indexRed = { ...indexRed, curentX: indexRed.curentX + 1 };
+  if (indexRed.currentX < maxRow) {
+    indexRed = { ...indexRed, currentX: indexRed.currentX + 1 };
     UpdateMap();
   }
 });
 right.addEventListener("click", (e) => {
-  if (indexRed.curentY < maxColumn) {
-    indexRed = { ...indexRed, curentY: indexRed.curentY + 1 };
+  if (indexRed.currentY < maxColumn) {
+    indexRed = { ...indexRed, currentY: indexRed.currentY + 1 };
     UpdateMap();
   }
 });
 
 left.addEventListener("click", (e) => {
-  if (indexRed.curentY > 0) {
-    indexRed = { ...indexRed, curentY: indexRed.curentY - 1 };
+  if (indexRed.currentY > 0) {
+    indexRed = { ...indexRed, currentY: indexRed.currentY - 1 };
     UpdateMap();
   }
 });
 
 const pickUpTrash = () => {
   let isIndex = arrayBlack.findIndex(
-    (item) => item.x == indexRed.curentX && item.y == indexRed.curentY
+    (item) => item.x == indexRed.currentX && item.y == indexRed.currentY
   );
   if (isIndex !== -1) {
     arrayBlack.splice(isIndex, 1);
@@ -107,10 +99,20 @@ const pickUpTrash = () => {
   }
 };
 
+// add event click S button
+const startBtn = $("start");
+
+function start() {
+  alert("bắt đầu trò chơi");
+  UpdateMap();
+}
+startBtn.addEventListener("click", start);
+
+// add event click A button
 const pickUpBtn = $("pickUp");
 
 function lumRac() {
-  pickUpTrash(indexRed.curentX, indexRed.curentY);
+  pickUpTrash(indexRed.currentX, indexRed.currentY);
   UpdateMap();
 }
 pickUpBtn.addEventListener("click", lumRac);
