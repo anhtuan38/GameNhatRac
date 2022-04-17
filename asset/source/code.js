@@ -66,31 +66,56 @@ const down = $("down");
 const right = $("right");
 const left = $("left");
 
-up.addEventListener("click", (e) => {
+const upEvent = () => {
   if (indexRed.currentX > 0) {
     indexRed = { ...indexRed, currentX: indexRed.currentX - 1 };
     UpdateMap();
   }
-});
-down.addEventListener("click", (e) => {
+};
+
+const downEvent = () => {
   if (indexRed.currentX < maxRow) {
     indexRed = { ...indexRed, currentX: indexRed.currentX + 1 };
     UpdateMap();
   }
-});
-right.addEventListener("click", (e) => {
-  if (indexRed.currentY < maxColumn) {
-    indexRed = { ...indexRed, currentY: indexRed.currentY + 1 };
-    UpdateMap();
-  }
-});
-
-left.addEventListener("click", (e) => {
+};
+const leftEvent = () => () => {
   if (indexRed.currentY > 0) {
     indexRed = { ...indexRed, currentY: indexRed.currentY - 1 };
     UpdateMap();
   }
-});
+};
+
+const rightEvent = () => {
+  if (indexRed.currentY < maxColumn) {
+    indexRed = { ...indexRed, currentY: indexRed.currentY + 1 };
+    UpdateMap();
+  }
+};
+
+up.addEventListener("click", upEvent);
+down.addEventListener("click", downEvent);
+right.addEventListener("click", rightEvent);
+left.addEventListener("click", leftEvent);
+
+window.onkeyup = function (e) {
+  console.log("🚀 ~ file: code.js ~ line 102 ~ e", e.keyCode);
+  if (e.keyCode === 38) {
+    upEvent();
+  }
+  if (e.keyCode === 40) {
+    downEvent();
+  }
+  if (e.keyCode === 39) {
+    rightEvent();
+  }
+  if (e.keyCode === 37) {
+    leftEvent();
+  }
+  if (e.keyCode === 13) {
+    pickUpTrash();
+  }
+};
 
 const pickUpTrash = () => {
   let isIndex = arrayBlack.findIndex(
