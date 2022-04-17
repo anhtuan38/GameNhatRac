@@ -1,6 +1,8 @@
 const maxRow = 12;
 const maxColumn = 13;
 const blackPoints = 5;
+let indexRed = { currentX: 0, currentY: 0 };
+let arrayBlack = [];
 
 let isStartGame = false;
 
@@ -34,8 +36,6 @@ function Check(x, y) {
 }
 
 const root = $("root");
-let indexRed = { currentX: 0, currentY: 0 };
-let arrayBlack = [];
 
 function UpdateMap() {
   $("childrenRoot").remove();
@@ -50,19 +50,22 @@ function UpdateMap() {
       div.setAttribute("data-x", i);
       div.setAttribute("data-y", j);
 
-      if (i === indexRed.currentX && j === indexRed.currentY) {
-        const red = document.createElement("div");
-        red.setAttribute("class", "red");
-        div.append(red);
-      }
-      if (Check(i, j)) {
-        const Black = document.createElement("div");
-        Black.setAttribute("class", "black");
-        div.append(Black);
+      if (isStartGame) {
+        if (i === indexRed.currentX && j === indexRed.currentY) {
+          const red = document.createElement("div");
+          red.setAttribute("class", "red");
+          div.append(red);
+        }
+        if (Check(i, j)) {
+          const Black = document.createElement("div");
+          Black.setAttribute("class", "black");
+          div.append(Black);
+        }
       }
       divChildren.append(div);
     }
 }
+UpdateMap();
 
 const UpdateIndex = function (x, y) {
   indexRed.currentX = x;
@@ -119,6 +122,7 @@ down.addEventListener("click", () => isStartGame && downEvent());
 right.addEventListener("click", () => isStartGame && rightEvent());
 left.addEventListener("click", () => isStartGame && leftEvent());
 
+// add event press keyboard
 window.onkeyup = function (e) {
   if (isStartGame) {
     e.keyCode === 38 && upEvent();
