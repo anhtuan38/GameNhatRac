@@ -1,6 +1,8 @@
 const maxRow = 12;
 const maxColumn = 13;
 
+let isStartGame = false;
+
 const $ = (value) => {
   return document.getElementById(value);
 };
@@ -79,7 +81,7 @@ const downEvent = () => {
     UpdateMap();
   }
 };
-const leftEvent = () => () => {
+const leftEvent = () => {
   if (indexRed.currentY > 0) {
     indexRed = { ...indexRed, currentY: indexRed.currentY - 1 };
     UpdateMap();
@@ -90,30 +92,6 @@ const rightEvent = () => {
   if (indexRed.currentY < maxColumn) {
     indexRed = { ...indexRed, currentY: indexRed.currentY + 1 };
     UpdateMap();
-  }
-};
-
-up.addEventListener("click", upEvent);
-down.addEventListener("click", downEvent);
-right.addEventListener("click", rightEvent);
-left.addEventListener("click", leftEvent);
-
-window.onkeyup = function (e) {
-  console.log("🚀 ~ file: code.js ~ line 102 ~ e", e.keyCode);
-  if (e.keyCode === 38) {
-    upEvent();
-  }
-  if (e.keyCode === 40) {
-    downEvent();
-  }
-  if (e.keyCode === 39) {
-    rightEvent();
-  }
-  if (e.keyCode === 37) {
-    leftEvent();
-  }
-  if (e.keyCode === 13) {
-    pickUpTrash();
   }
 };
 
@@ -130,11 +108,31 @@ const pickUpTrash = () => {
   }
 };
 
+up.addEventListener("click", () => isStartGame && upEvent());
+down.addEventListener("click", () => isStartGame && downEvent());
+right.addEventListener("click", () => isStartGame && rightEvent());
+left.addEventListener("click", () => isStartGame && leftEvent());
+
+window.onkeyup = function (e) {
+  if (isStartGame) {
+    e.keyCode === 38 && upEvent();
+
+    e.keyCode === 40 && downEvent();
+
+    e.keyCode === 39 && rightEvent();
+
+    e.keyCode === 37 && leftEvent();
+
+    e.keyCode === 13 && pickUpTrash();
+  }
+};
+
 // add event click S button
 const startBtn = $("start");
 
 function start() {
   alert("bắt đầu trò chơi");
+  isStartGame = true;
   UpdateMap();
 }
 startBtn.addEventListener("click", start);
