@@ -153,6 +153,6 @@ const pickUpBtn = $("pickUp");
 
 function lumRac() {
   pickUpTrash(indexRed.currentX, indexRed.currentY);
-  UpdateMap();
+  isStartGame && UpdateMap();
 }
 pickUpBtn.addEventListener("click", lumRac);
