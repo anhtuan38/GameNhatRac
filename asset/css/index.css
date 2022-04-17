@@ -60,7 +60,7 @@
 
 .black {
   position: absolute;
-  filter: blur(3px);
+  filter: blur(5px);
   background-color: black;
   width: 100%;
   height: 100%;
