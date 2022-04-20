@@ -142,6 +142,8 @@ const startBtn = $("start");
 
 function start() {
   alert("bắt đầu trò chơi");
+  indexRed = { currentX: 0, currentY: 0 };
+  arrayBlack = [];
   randomArrayBlack();
   isStartGame = true;
   UpdateMap();
